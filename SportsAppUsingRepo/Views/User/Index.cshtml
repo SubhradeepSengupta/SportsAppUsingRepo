@@ -1,0 +1,31 @@
+﻿@model  IEnumerable<SportsAppUsingRepo.Models.User>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="jumbotron" style="margin-top: 3%; text-align:center">
+    <h2 style="margin-bottom: 2%;">User Table</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr style="font-weight:bold">
+                <td>User Name</td>
+                <td>User Role</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Role</td>
+                    <td><a asp-action="Edit" asp-route-id="@user.ID">Edit</a></td>
+                    <td><a asp-action="Delete" asp-route-id="@user.ID">Delete</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<a class="btn btn-primary" asp-action="Create">Create</a>

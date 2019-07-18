@@ -1,0 +1,68 @@
+﻿@model SportsAppUsingRepo.Models.TestTypeMapper
+
+@{
+    ViewData["Title"] = "TestDetails";
+}
+
+<div class="jumbotron" style="margin-top: 3%; text-align: center">
+
+
+    <h2>@Model.TestType.Name</h2>
+    <h3>@Model.Test.Date</h3>
+
+    @if (Model.TestType.Name.Equals("Cooper Test"))
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>Ranking</td>
+                    <td>Distance(meter)</td>
+                    <td>Fitness Rating</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var athlete in Model.Test.UserTestMappers.OrderByDescending(a => a.CooperTestDistance))
+                {
+                    <tr>
+                        <td><a asp-action="EditAthlete" asp-route-id="@athlete.UserID" asp-route-testName="@Model.TestType.Name" style="display: block; color: black; text-decoration:none">@athlete.User.Name</a></td>
+                        <td><a asp-action="EditAthlete" asp-route-id="@athlete.UserID" asp-route-testName="@Model.TestType.Name" style="display: block; color: black; text-decoration:none">@athlete.CooperTestDistance</a></td>
+                        <td><a asp-action="EditAthlete" asp-route-id="@athlete.UserID" asp-route-testName="@Model.TestType.Name" style="display: block; color: black; text-decoration:none">@athlete.FitnessRating</a></td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="3"><a class="btn btn-success" asp-action="AddAthlete" asp-route-testName="@Model.TestType.Name">Add New Athlete To Test</a></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><a class="btn btn-danger" asp-action="DeleteTest" asp-route-id="@Model.TestID" onclick="return confirm ('Are you sure about deleting the test?')">Delete Test</a></td>
+                </tr>
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>Ranking</td>
+                    <td>Time</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var athlete in Model.Test.UserTestMappers.OrderBy(a => a.SprintTestTime))
+                {
+                    <tr>
+                        <td><a asp-action="EditAthlete" asp-route-id="@athlete.UserID" asp-route-testName="@Model.TestType.Name" style="display: block; color: black; text-decoration:none">@athlete.User.Name</a></td>
+                        <td><a asp-action="EditAthlete" asp-route-id="@athlete.UserID" asp-route-testName="@Model.TestType.Name" style="display: block; color: black; text-decoration:none">@athlete.SprintTestTime</a></td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="3"><a class="btn btn-success" asp-action="AddAthlete" asp-route-testName="@Model.TestType.Name">Add New Athlete To Test</a></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><a class="btn btn-danger" asp-action="DeleteTest" asp-route-id="@Model.TestID" onclick="return confirm ('Are you sure about deleting the test?')">Delete Test</a></td>
+                </tr>
+            </tbody>
+        </table>
+    }
+
+</div>

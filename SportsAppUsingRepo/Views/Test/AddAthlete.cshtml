@@ -1,0 +1,38 @@
+﻿@model IEnumerable<SportsAppUsingRepo.Models.User>
+
+@{
+    ViewData["Title"] = "AddAthlete";
+}
+
+<div class="jumbotron" style="margin-top: 3%; text-align: center">
+    <h2>Add Athlete To Test</h2>
+
+    <form asp-action="AddAthlete">
+        <label>Name</label>
+        <select id="Name" name="Name" class="form-control">
+            @foreach (User user in Model)
+            {
+                <option>@user.Name</option>
+            }
+        </select>
+
+        @if (@ViewBag.TestName == "Cooper Test")
+        {
+            <div class="form-group" style="margin-top: 2%;">
+                <label>Distance</label>
+                <input class="form-control" id="Distance" name="Distance" autocomplete="off" />
+            </div>
+        }
+        else
+        {
+            <div class="form-group" style="margin-top: 2%;">
+                <label>Time</label>
+                <input class="form-control" id="Time" name="Time" autocomplete="off" />
+            </div>
+        }
+
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</div>
+
+

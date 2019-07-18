@@ -1,0 +1,29 @@
+﻿@model IEnumerable<SportsAppUsingRepo.Models.TestTypeMapper>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="jumbotron" style="margin: 2%; text-align: center;">
+    <a asp-action="CreateTest" class="btn btn-primary btn-lg" style="margin-bottom: 3%;">Create New Test</a>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td>Date</td>
+                <td>Number Of Participants</td>
+                <td>Test Type</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tests in Model)
+            {
+                <tr>
+                    <td><a asp-action="TestDetails" asp-route-id="@tests.ID" style="text-decoration: none; color: black; display: block;">@tests.Test.Date.ToShortDateString()</a></td>
+                    <td><a asp-action="TestDetails" asp-route-id="@tests.ID" style="text-decoration: none; color: black; display: block;">@tests.Test.UserTestMappers.Count()</a></td>
+                    <td><a asp-action="TestDetails" asp-route-id="@tests.ID" style="text-decoration: none; color: black; display: block;">@tests.TestType.Name</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
